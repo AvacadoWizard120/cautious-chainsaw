@@ -30,11 +30,11 @@ print("Restock cards in deck: " + str(deck.get_card_count("Restock")))
 
 # Set the initial level at turn 0
 game_level = [
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0]
+    [0, 2, 0, 0, 2, 0, 0, 1],
+    [0, 1, 0, 0, 1, 0, 0, 1],
+    [0, 2, 0, 0, 1, 0, 0, 1],
+    [0, 3, 0, 0, 2, 0, 0, 1],
+    [0, 2, 0, 0, 3, 0, 0, 1]
 ]
 
 unit_data = [
@@ -55,7 +55,7 @@ trench_data = {
 
 
 
-# You can then iterate over the game_level array and print the appropriate symbol based on the trench_data and unit_data
+# I don't know why I'm commenting so much you probably already know what this does.
 for row in range(len(game_level)):
     for col in range(len(game_level[row])):
         if game_level[row][col] in trench_data:
@@ -64,9 +64,8 @@ for row in range(len(game_level)):
             units = unit_data[row][col]
             print(f'{symbol}{(size - 1) * " "}{units}{symbol}', end='')
         else:
-            print(' ' * 5, end='')  # Print 5 spaces for non-trench tiles
-    print()  # Print a new line after each row
+            print(' ' * 5, end='')
+    print()
 
 
 user_input = input("Press Enter to continue...")
-print("You pressed Enter!")
