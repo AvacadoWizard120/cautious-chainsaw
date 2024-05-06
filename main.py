@@ -39,11 +39,11 @@ print("Restock cards in deck: " + str(deck.get_card_count("Restock")))
 
 # Set the initial level at turn 0
 game_level = [
-    [0, 2, 0, 0, 2, 0, 0, 1],
     [0, 1, 0, 0, 1, 0, 0, 1],
-    [0, 2, 0, 0, 1, 0, 0, 1],
-    [0, 3, 0, 0, 2, 0, 0, 1],
-    [0, 2, 0, 0, 3, 0, 0, 1]
+    [0, 1, 0, 0, 1, 0, 0, 1],
+    [0, 1, 0, 0, 1, 0, 0, 1],
+    [0, 1, 0, 0, 1, 0, 0, 1],
+    [0, 1, 0, 0, 1, 0, 0, 1]
 ]
 
 unit_data = [
@@ -66,11 +66,10 @@ trench_data = {
 
 # Function to draw a trench
 def draw_trench(trench, x, y):
-    symbol = trench_data[trench]['symbol']
+    color = (0, 0, 0)  # Black color
     size = trench_data[trench]['size']
     for i in range(size):
-        pygame.draw.rect(screen, (0, 0, 255), (x + i * TILE_SIZE + MARGIN, y + i * TILE_SIZE + MARGIN, TILE_SIZE - 2 * MARGIN, TILE_SIZE - 2 * MARGIN))
-        screen.blit(pygame.font.SysFont('Arial', 30).render(symbol, True, (255, 255, 255)), (x + i * TILE_SIZE + MARGIN, y + i * TILE_SIZE + MARGIN))
+        pygame.draw.rect(screen, color, (x + i * TILE_SIZE, y + i * TILE_SIZE, TILE_SIZE, TILE_SIZE))
 
 # Function to draw the game level
 def draw_game_level():
