@@ -1,4 +1,13 @@
 from deck_builder import Card, Deck
+import pygame
+import sys
+
+pygame.init()
+WIDTH, HEIGHT = 800, 600
+TILE_SIZE = 50
+MARGIN = 10
+
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 deck = Deck()
 
@@ -55,17 +64,33 @@ trench_data = {
 
 
 
-# I don't know why I'm commenting so much you probably already know what this does.
-for row in range(len(game_level)):
-    for col in range(len(game_level[row])):
-        if game_level[row][col] in trench_data:
-            symbol = trench_data[game_level[row][col]]['symbol']
-            size = trench_data[game_level[row][col]]['size']
-            units = unit_data[row][col]
-            print(f'{symbol}{(size - 1) * " "}{units}{symbol}', end='')
-        else:
-            print(' ' * 5, end='')
-    print()
+# Function to draw a trench
+def draw_trench(trench, x, y):
+    symbol = trench_data[trench]['symbol']
+    size = trench_data[trench]['size']
+    for i in range(size):
+        pygame.draw.rect(screen, (0, 0, 255), (x + i * TILE_SIZE + MARGIN, y + i * TILE_SIZE + MARGIN, TILE_SIZE - 2 * MARGIN, TILE_SIZE - 2 * MARGIN))
+        screen.blit(pygame.font.SysFont('Arial', 30).render(symbol, True, (255, 255, 255)), (x + i * TILE_SIZE + MARGIN, y + i * TILE_SIZE + MARGIN))
 
+# Function to draw the game level
+def draw_game_level():
+    for row in range(len(game_level)):
+        for col in range(len(game_level[row])):
+            if game_level[row][col] in trench_data:
+                draw_trench(game_level[row][col], col * TILE_SIZE, row * TILE_SIZE)
 
-user_input = input("Press Enter to continue...")
+# Game loop
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+    # Fill the screen with white
+    screen.fill((255, 255, 255))
+
+    # Draw the game level
+    draw_game_level()
+
+    # Update the display
+    pygame.display.flip()
